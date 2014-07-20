@@ -16,7 +16,7 @@ class ehough_templating_test_loader_ChainLoaderTest extends PHPUnit_Framework_Te
 
     protected function setUp()
     {
-        $fixturesPath = realpath(__DIR__.'/../../../../../resources/Fixtures/');
+        $fixturesPath = realpath(dirname(__FILE__).'/../../../../../resources/Fixtures/');
         $this->loader1 = new ehough_templating_loader_FilesystemLoader($fixturesPath.'/null/%name%');
         $this->loader2 = new ehough_templating_loader_FilesystemLoader($fixturesPath.'/templates/%name%');
     }

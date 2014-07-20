@@ -20,7 +20,7 @@ class ehough_templating_test_loader_FilesystemLoaderTest extends PHPUnit_Framewo
 
     public static function setUpBeforeClass()
     {
-        self::$fixturesPath = realpath(__DIR__.'/../../../../../resources/Fixtures/');
+        self::$fixturesPath = realpath(dirname(__FILE__).'/../../../../../resources/Fixtures/');
     }
 
     public function testConstructor()
