@@ -1,7 +1,7 @@
 {
-    "name": "symfony/templating",
+    "name": "ehough/templating",
     "type": "library",
-    "description": "Symfony Templating Component",
+    "description": "Fork of Symfony's Templating component  compatible with PHP 5.2+",
     "keywords": [],
     "homepage": "http://symfony.com",
     "license": "MIT",
