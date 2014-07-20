@@ -9,6 +9,9 @@
  * file that was distributed with this source code.
  */
 
+class_exists('ehough_templating_test_helper_SimpleHelper') ||
+    require dirname(__FILE__) . '/helper/SimpleHelper.php';
+
 class ehough_templating_test_ehough_templating_PhpEngineTest extends PHPUnit_Framework_TestCase
 {
     protected $loader;
