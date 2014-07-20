@@ -31,8 +31,8 @@
     },
     "autoload": {
         "psr-0": {
-            "ehough_templating": "src",
-            "ehough_templating_test": "tests"
+            "ehough_templating": "src/main/php",
+            "ehough_templating_test": "src/test/php"
         }
     },
     "minimum-stability": "dev",

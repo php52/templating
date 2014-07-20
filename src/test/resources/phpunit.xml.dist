@@ -4,20 +4,20 @@
          xsi:noNamespaceSchemaLocation="http://schema.phpunit.de/4.1/phpunit.xsd"
          backupGlobals="false"
          colors="true"
-         bootstrap="vendor/autoload.php"
+         bootstrap="../../../vendor/autoload.php"
 >
     <testsuites>
         <testsuite name="Symfony Templating Component Test Suite">
-            <directory>./Tests/</directory>
+            <directory>../php</directory>
         </testsuite>
     </testsuites>
 
     <filter>
         <whitelist>
-            <directory>./</directory>
+            <directory>../../main/php</directory>
             <exclude>
-                <directory>./vendor</directory>
-                <directory>./Tests</directory>
+                <directory>../../../vendor</directory>
+                <directory>../php</directory>
             </exclude>
         </whitelist>
     </filter>

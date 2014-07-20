@@ -15,7 +15,7 @@ class ehough_templating_test_storage_FileStorageTest extends PHPUnit_Framework_T
     {
         $storage = new ehough_templating_storage_FileStorage('foo');
         $this->assertInstanceOf('ehough_templating_storage_Storage', $storage, 'ehough_templating_storage_FileStorage is an instance of Storage');
-        $storage = new ehough_templating_storage_FileStorage(__DIR__.'/../../../../Fixtures/templates/foo.php');
+        $storage = new ehough_templating_storage_FileStorage(__DIR__.'/../../../../../resources/Fixtures/templates/foo.php');
         $this->assertEquals('<?php echo $foo ?>'."\n", $storage->getContent(), '->getContent() returns the content of the template');
     }
 }

@@ -35,7 +35,7 @@ interface ehough_templating_TemplateReferenceInterface
      *
      * @return ehough_templating_TemplateReferenceInterface The ehough_templating_TemplateReferenceInterface instance
      *
-     * @throws  \InvalidArgumentException if the parameter name is not supported
+     * @throws  InvalidArgumentException if the parameter name is not supported
      *
      * @api
      */
@@ -48,7 +48,7 @@ interface ehough_templating_TemplateReferenceInterface
      *
      * @return string The parameter value
      *
-     * @throws  \InvalidArgumentException if the parameter name is not supported
+     * @throws  InvalidArgumentException if the parameter name is not supported
      *
      * @api
      */
