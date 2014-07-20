@@ -9,6 +9,11 @@
  * file that was distributed with this source code.
  */
 
+if (!interface_exists('ehough_templating_test_MockLoggerInterface', false)) {
+
+    require dirname(__FILE__) . '/../MockLoggerInterface.php';
+}
+
 class ehough_templating_test_loader_CacheLoaderTest extends PHPUnit_Framework_TestCase
 {
     public function testConstructor()
@@ -26,12 +31,12 @@ class ehough_templating_test_loader_CacheLoaderTest extends PHPUnit_Framework_Te
         $loader = new ProjectTemplateLoader($varLoader = new ProjectTemplateLoaderVar(), $dir);
         $this->assertFalse($loader->load(new ehough_templating_TemplateReference('foo', 'php')), '->load() returns false if the embed loader is not able to load the template');
 
-        $logger = $this->getMock('Psr\Log\LoggerInterface');
+        $logger = $this->getMock('ehough_templating_test_MockLoggerInterface');
         $logger->expects($this->once())->method('debug')->with('Storing template "index" in cache');
         $loader->setLogger($logger);
         $loader->load(new ehough_templating_TemplateReference('index'));
 
-        $logger = $this->getMock('Psr\Log\LoggerInterface');
+        $logger = $this->getMock('ehough_templating_test_MockLoggerInterface');
         $logger->expects($this->once())->method('debug')->with('Fetching template "index" from cache');
         $loader->setLogger($logger);
         $loader->load(new ehough_templating_TemplateReference('index'));

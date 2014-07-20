@@ -31,7 +31,7 @@ if(!function_exists('array_replace')) {
                 return NULL;
             }
         }
-        
+
         return $res;
     }
 }

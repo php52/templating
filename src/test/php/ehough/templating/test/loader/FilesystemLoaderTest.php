@@ -9,6 +9,11 @@
  * file that was distributed with this source code.
  */
 
+if (!interface_exists('ehough_templating_test_MockLoggerInterface', false)) {
+
+    require dirname(__FILE__) . '/../MockLoggerInterface.php';
+}
+
 class ehough_templating_test_loader_FilesystemLoaderTest extends PHPUnit_Framework_TestCase
 {
     protected static $fixturesPath;
@@ -53,7 +58,7 @@ class ehough_templating_test_loader_FilesystemLoaderTest extends PHPUnit_Framewo
         $this->assertInstanceOf('ehough_templating_storage_FileStorage', $storage, '->load() returns a ehough_templating_storage_FileStorage if you pass a relative template that exists');
         $this->assertEquals($path.'/foo.php', (string) $storage, '->load() returns a ehough_templating_storage_FileStorage pointing to the absolute path of the template');
 
-        $logger = $this->getMock('Psr\Log\LoggerInterface');
+        $logger = $this->getMock('ehough_templating_test_MockLoggerInterface');
         $logger->expects($this->exactly(2))->method('debug');
 
         $loader = new ProjectTemplateLoader2($pathPattern);
