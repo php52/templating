@@ -9,18 +9,13 @@
  * file that was distributed with this source code.
  */
 
-namespace Symfony\Component\Templating\Tests\Storage;
-
-use Symfony\Component\Templating\Storage\Storage;
-use Symfony\Component\Templating\Storage\FileStorage;
-
-class FileStorageTest extends \PHPUnit_Framework_TestCase
+class ehough_templating_test_storage_FileStorageTest extends PHPUnit_Framework_TestCase
 {
     public function testGetContent()
     {
-        $storage = new FileStorage('foo');
-        $this->assertInstanceOf('Symfony\Component\Templating\Storage\Storage', $storage, 'FileStorage is an instance of Storage');
-        $storage = new FileStorage(__DIR__.'/../Fixtures/templates/foo.php');
+        $storage = new ehough_templating_storage_FileStorage('foo');
+        $this->assertInstanceOf('ehough_templating_storage_Storage', $storage, 'ehough_templating_storage_FileStorage is an instance of Storage');
+        $storage = new ehough_templating_storage_FileStorage(__DIR__.'/../Fixtures/templates/foo.php');
         $this->assertEquals('<?php echo $foo ?>'."\n", $storage->getContent(), '->getContent() returns the content of the template');
     }
 }

@@ -9,15 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Symfony\Component\Templating\Tests\Loader;
-
-use Symfony\Component\Templating\Loader\Loader;
-use Symfony\Component\Templating\Loader\CacheLoader;
-use Symfony\Component\Templating\Storage\StringStorage;
-use Symfony\Component\Templating\TemplateReferenceInterface;
-use Symfony\Component\Templating\TemplateReference;
-
-class CacheLoaderTest extends \PHPUnit_Framework_TestCase
+class ehough_templating_test_loader_CacheLoaderTest extends PHPUnit_Framework_TestCase
 {
     public function testConstructor()
     {
@@ -32,21 +24,21 @@ class CacheLoaderTest extends \PHPUnit_Framework_TestCase
         mkdir($dir, 0777, true);
 
         $loader = new ProjectTemplateLoader($varLoader = new ProjectTemplateLoaderVar(), $dir);
-        $this->assertFalse($loader->load(new TemplateReference('foo', 'php')), '->load() returns false if the embed loader is not able to load the template');
+        $this->assertFalse($loader->load(new ehough_templating_TemplateReference('foo', 'php')), '->load() returns false if the embed loader is not able to load the template');
 
         $logger = $this->getMock('Psr\Log\LoggerInterface');
         $logger->expects($this->once())->method('debug')->with('Storing template "index" in cache');
         $loader->setLogger($logger);
-        $loader->load(new TemplateReference('index'));
+        $loader->load(new ehough_templating_TemplateReference('index'));
 
         $logger = $this->getMock('Psr\Log\LoggerInterface');
         $logger->expects($this->once())->method('debug')->with('Fetching template "index" from cache');
         $loader->setLogger($logger);
-        $loader->load(new TemplateReference('index'));
+        $loader->load(new ehough_templating_TemplateReference('index'));
     }
 }
 
-class ProjectTemplateLoader extends CacheLoader
+class ProjectTemplateLoader extends ehough_templating_loader_CacheLoader
 {
     public function getDir()
     {
@@ -59,7 +51,7 @@ class ProjectTemplateLoader extends CacheLoader
     }
 }
 
-class ProjectTemplateLoaderVar extends Loader
+class ProjectTemplateLoaderVar extends ehough_templating_loader_Loader
 {
     public function getIndexTemplate()
     {
@@ -71,16 +63,16 @@ class ProjectTemplateLoaderVar extends Loader
         return 'Hello {{ name }}';
     }
 
-    public function load(TemplateReferenceInterface $template)
+    public function load(ehough_templating_TemplateReferenceInterface $template)
     {
         if (method_exists($this, $method = 'get'.ucfirst($template->get('name')).'Template')) {
-            return new StringStorage($this->$method());
+            return new ehough_templating_storage_StringStorage($this->$method());
         }
 
         return false;
     }
 
-    public function isFresh(TemplateReferenceInterface $template, $time)
+    public function isFresh(ehough_templating_TemplateReferenceInterface $template, $time)
     {
         return false;
     }

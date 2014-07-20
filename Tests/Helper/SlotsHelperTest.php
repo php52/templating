@@ -9,15 +9,11 @@
  * file that was distributed with this source code.
  */
 
-namespace Symfony\Component\Templating\Tests\Helper;
-
-use Symfony\Component\Templating\Helper\SlotsHelper;
-
-class SlotsHelperTest extends \PHPUnit_Framework_TestCase
+class ehough_templating_test_helper_SlotsHelperTest extends PHPUnit_Framework_TestCase
 {
     public function testHasGetSet()
     {
-        $helper = new SlotsHelper();
+        $helper = new ehough_templating_helper_SlotsHelper();
         $helper->set('foo', 'bar');
         $this->assertEquals('bar', $helper->get('foo'), '->set() sets a slot value');
         $this->assertEquals('bar', $helper->get('bar', 'bar'), '->get() takes a default value to return if the slot does not exist');
@@ -28,7 +24,7 @@ class SlotsHelperTest extends \PHPUnit_Framework_TestCase
 
     public function testOutput()
     {
-        $helper = new SlotsHelper();
+        $helper = new ehough_templating_helper_SlotsHelper();
         $helper->set('foo', 'bar');
         ob_start();
         $ret = $helper->output('foo');
@@ -51,7 +47,7 @@ class SlotsHelperTest extends \PHPUnit_Framework_TestCase
 
     public function testStartStop()
     {
-        $helper = new SlotsHelper();
+        $helper = new ehough_templating_helper_SlotsHelper();
         $helper->start('bar');
         echo 'foo';
         $helper->stop();
@@ -63,17 +59,17 @@ class SlotsHelperTest extends \PHPUnit_Framework_TestCase
             $helper->start('bar');
             $helper->stop();
             $this->fail('->start() throws an InvalidArgumentException if a slot with the same name is already started');
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             $helper->stop();
-            $this->assertInstanceOf('\InvalidArgumentException', $e, '->start() throws an InvalidArgumentException if a slot with the same name is already started');
+            $this->assertInstanceOf('InvalidArgumentException', $e, '->start() throws an InvalidArgumentException if a slot with the same name is already started');
             $this->assertEquals('A slot named "bar" is already started.', $e->getMessage(), '->start() throws an InvalidArgumentException if a slot with the same name is already started');
         }
 
         try {
             $helper->stop();
             $this->fail('->stop() throws an LogicException if no slot is started');
-        } catch (\Exception $e) {
-            $this->assertInstanceOf('\LogicException', $e, '->stop() throws an LogicException if no slot is started');
+        } catch (Exception $e) {
+            $this->assertInstanceOf('LogicException', $e, '->stop() throws an LogicException if no slot is started');
             $this->assertEquals('No slot started.', $e->getMessage(), '->stop() throws an LogicException if no slot is started');
         }
     }

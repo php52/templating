@@ -9,17 +9,13 @@
  * file that was distributed with this source code.
  */
 
-namespace Symfony\Component\Templating\Tests\Helper;
-
-use Symfony\Component\Templating\Helper\CoreAssetsHelper;
-
-class CoreAssetsHelperTest extends \PHPUnit_Framework_TestCase
+class ehough_templating_test_asset_CoreAssetsHelperTest extends PHPUnit_Framework_TestCase
 {
     protected $package;
 
     protected function setUp()
     {
-        $this->package = $this->getMock('Symfony\Component\Templating\Asset\PackageInterface');
+        $this->package = $this->getMock('ehough_templating_asset_PackageInterface');
     }
 
     protected function tearDown()
@@ -29,7 +25,7 @@ class CoreAssetsHelperTest extends \PHPUnit_Framework_TestCase
 
     public function testAddGetPackage()
     {
-        $helper = new CoreAssetsHelper($this->package);
+        $helper = new ehough_templating_helper_CoreAssetsHelper($this->package);
 
         $helper->addPackage('foo', $this->package);
 
@@ -38,16 +34,16 @@ class CoreAssetsHelperTest extends \PHPUnit_Framework_TestCase
 
     public function testGetNonexistingPackage()
     {
-        $helper = new CoreAssetsHelper($this->package);
+        $helper = new ehough_templating_helper_CoreAssetsHelper($this->package);
 
-        $this->setExpectedException('\InvalidArgumentException');
+        $this->setExpectedException('InvalidArgumentException');
 
         $helper->getPackage('foo');
     }
 
     public function testGetHelperName()
     {
-        $helper = new CoreAssetsHelper($this->package);
+        $helper = new ehough_templating_helper_CoreAssetsHelper($this->package);
 
         $this->assertEquals('assets', $helper->getName());
     }

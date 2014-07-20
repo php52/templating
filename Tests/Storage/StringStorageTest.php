@@ -9,18 +9,13 @@
  * file that was distributed with this source code.
  */
 
-namespace Symfony\Component\Templating\Tests\Storage;
-
-use Symfony\Component\Templating\Storage\Storage;
-use Symfony\Component\Templating\Storage\StringStorage;
-
-class StringStorageTest extends \PHPUnit_Framework_TestCase
+class ehough_templating_storage_StringStorageTest extends PHPUnit_Framework_TestCase
 {
     public function testGetContent()
     {
-        $storage = new StringStorage('foo');
-        $this->assertInstanceOf('Symfony\Component\Templating\Storage\Storage', $storage, 'StringStorage is an instance of Storage');
-        $storage = new StringStorage('foo');
+        $storage = new ehough_templating_storage_StringStorage('foo');
+        $this->assertInstanceOf('ehough_templating_storage_Storage', $storage, 'ehough_templating_storage_StringStorage is an instance of Storage');
+        $storage = new ehough_templating_storage_StringStorage('foo');
         $this->assertEquals('foo', $storage->getContent(), '->getContent() returns the content of the template');
     }
 }

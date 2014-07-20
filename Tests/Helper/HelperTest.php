@@ -9,11 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Symfony\Component\Templating\Tests\Helper;
-
-use Symfony\Component\Templating\Helper\Helper;
-
-class HelperTest extends \PHPUnit_Framework_TestCase
+class ehough_templating_test_helper_HelperTest extends PHPUnit_Framework_TestCase
 {
     public function testGetSetCharset()
     {
@@ -23,7 +19,7 @@ class HelperTest extends \PHPUnit_Framework_TestCase
     }
 }
 
-class ProjectTemplateHelper extends Helper
+class ProjectTemplateHelper extends ehough_templating_helper_Helper
 {
     public function getName()
     {

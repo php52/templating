@@ -9,11 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Symfony\Component\Templating\Tests\Storage;
-
-use Symfony\Component\Templating\Storage\Storage;
-
-class StorageTest extends \PHPUnit_Framework_TestCase
+class ehough_templating_test_storage_StorageTest extends PHPUnit_Framework_TestCase
 {
     public function testMagicToString()
     {
@@ -22,7 +18,7 @@ class StorageTest extends \PHPUnit_Framework_TestCase
     }
 }
 
-class TestStorage extends Storage
+class TestStorage extends ehough_templating_storage_Storage
 {
     public function getContent()
     {

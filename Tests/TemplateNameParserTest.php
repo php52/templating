@@ -9,18 +9,13 @@
  * file that was distributed with this source code.
  */
 
-namespace Symfony\Component\Templating\Tests;
-
-use Symfony\Component\Templating\TemplateNameParser;
-use Symfony\Component\Templating\TemplateReference;
-
-class TemplateNameParserTest extends \PHPUnit_Framework_TestCase
+class ehough_templating_test_TemplateNameParserTest extends PHPUnit_Framework_TestCase
 {
     protected $parser;
 
     protected function setUp()
     {
-        $this->parser = new TemplateNameParser();
+        $this->parser = new ehough_templating_TemplateNameParser();
     }
 
     protected function tearDown()
@@ -42,9 +37,9 @@ class TemplateNameParserTest extends \PHPUnit_Framework_TestCase
     public function getLogicalNameToTemplateProvider()
     {
         return array(
-            array('/path/to/section/name.engine', new TemplateReference('/path/to/section/name.engine', 'engine')),
-            array('name.engine', new TemplateReference('name.engine', 'engine')),
-            array('name', new TemplateReference('name')),
+            array('/path/to/section/name.engine', new ehough_templating_TemplateReference('/path/to/section/name.engine', 'engine')),
+            array('name.engine', new ehough_templating_TemplateReference('name.engine', 'engine')),
+            array('name', new ehough_templating_TemplateReference('name')),
         );
     }
 }

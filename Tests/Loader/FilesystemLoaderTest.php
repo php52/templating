@@ -9,13 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Symfony\Component\Templating\Tests\Loader;
-
-use Symfony\Component\Templating\Loader\FilesystemLoader;
-use Symfony\Component\Templating\Storage\FileStorage;
-use Symfony\Component\Templating\TemplateReference;
-
-class FilesystemLoaderTest extends \PHPUnit_Framework_TestCase
+class ehough_templating_test_loader_FilesystemLoaderTest extends PHPUnit_Framework_TestCase
 {
     protected static $fixturesPath;
 
@@ -49,30 +43,30 @@ class FilesystemLoaderTest extends \PHPUnit_Framework_TestCase
         $pathPattern = self::$fixturesPath.'/templates/%name%';
         $path = self::$fixturesPath.'/templates';
         $loader = new ProjectTemplateLoader2($pathPattern);
-        $storage = $loader->load(new TemplateReference($path.'/foo.php', 'php'));
-        $this->assertInstanceOf('Symfony\Component\Templating\Storage\FileStorage', $storage, '->load() returns a FileStorage if you pass an absolute path');
-        $this->assertEquals($path.'/foo.php', (string) $storage, '->load() returns a FileStorage pointing to the passed absolute path');
+        $storage = $loader->load(new ehough_templating_TemplateReference($path.'/foo.php', 'php'));
+        $this->assertInstanceOf('ehough_templating_storage_FileStorage', $storage, '->load() returns a ehough_templating_storage_FileStorage if you pass an absolute path');
+        $this->assertEquals($path.'/foo.php', (string) $storage, '->load() returns a ehough_templating_storage_FileStorage pointing to the passed absolute path');
 
-        $this->assertFalse($loader->load(new TemplateReference('bar', 'php')), '->load() returns false if the template is not found');
+        $this->assertFalse($loader->load(new ehough_templating_TemplateReference('bar', 'php')), '->load() returns false if the template is not found');
 
-        $storage = $loader->load(new TemplateReference('foo.php', 'php'));
-        $this->assertInstanceOf('Symfony\Component\Templating\Storage\FileStorage', $storage, '->load() returns a FileStorage if you pass a relative template that exists');
-        $this->assertEquals($path.'/foo.php', (string) $storage, '->load() returns a FileStorage pointing to the absolute path of the template');
+        $storage = $loader->load(new ehough_templating_TemplateReference('foo.php', 'php'));
+        $this->assertInstanceOf('ehough_templating_storage_FileStorage', $storage, '->load() returns a ehough_templating_storage_FileStorage if you pass a relative template that exists');
+        $this->assertEquals($path.'/foo.php', (string) $storage, '->load() returns a ehough_templating_storage_FileStorage pointing to the absolute path of the template');
 
         $logger = $this->getMock('Psr\Log\LoggerInterface');
         $logger->expects($this->exactly(2))->method('debug');
 
         $loader = new ProjectTemplateLoader2($pathPattern);
         $loader->setLogger($logger);
-        $this->assertFalse($loader->load(new TemplateReference('foo.xml', 'php')), '->load() returns false if the template does not exist for the given engine');
+        $this->assertFalse($loader->load(new ehough_templating_TemplateReference('foo.xml', 'php')), '->load() returns false if the template does not exist for the given engine');
 
         $loader = new ProjectTemplateLoader2(array(self::$fixturesPath.'/null/%name%', $pathPattern));
         $loader->setLogger($logger);
-        $loader->load(new TemplateReference('foo.php', 'php'));
+        $loader->load(new ehough_templating_TemplateReference('foo.php', 'php'));
     }
 }
 
-class ProjectTemplateLoader2 extends FilesystemLoader
+class ProjectTemplateLoader2 extends ehough_templating_loader_FilesystemLoader
 {
     public function getTemplatePathPatterns()
     {

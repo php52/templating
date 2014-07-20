@@ -13,21 +13,28 @@
         {
             "name": "Symfony Community",
             "homepage": "http://symfony.com/contributors"
+        },
+        {
+            "name": "Eric Hough",
+            "email": "eric@tubepress.com"
         }
     ],
     "require": {
-        "php": ">=5.3.3"
+        "php": ">=5.2.9"
     },
     "require-dev": {
-        "psr/log": "~1.0"
+        "psr/log": "~1.0",
+        "phpunit/phpunit": "3.7.*"
     },
     "suggest": {
         "psr/log": "For using debug logging in loaders"
     },
     "autoload": {
-        "psr-0": { "Symfony\\Component\\Templating\\": "" }
+        "psr-0": {
+            "ehough_templating": "src",
+            "ehough_templating_test": "tests"
+        }
     },
-    "target-dir": "Symfony/Component/Templating",
     "minimum-stability": "dev",
     "extra": {
         "branch-alias": {

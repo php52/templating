@@ -9,12 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Symfony\Component\Templating\Tests\Loader;
-
-use Symfony\Component\Templating\Loader\Loader;
-use Symfony\Component\Templating\TemplateReferenceInterface;
-
-class LoaderTest extends \PHPUnit_Framework_TestCase
+class ehough_templating_test_loader_LoaderTest extends PHPUnit_Framework_TestCase
 {
     public function testGetSetLogger()
     {
@@ -27,15 +22,15 @@ class LoaderTest extends \PHPUnit_Framework_TestCase
     public function testGetSetDebugger()
     {
         $loader = new ProjectTemplateLoader4();
-        $debugger = $this->getMock('Symfony\Component\Templating\DebuggerInterface');
+        $debugger = $this->getMock('ehough_templating_DebuggerInterface');
         $loader->setDebugger($debugger);
         $this->assertSame($debugger, $loader->getDebugger(), '->setDebugger() sets the debugger instance');
     }
 }
 
-class ProjectTemplateLoader4 extends Loader
+class ProjectTemplateLoader4 extends ehough_templating_loader_Loader
 {
-    public function load(TemplateReferenceInterface $template)
+    public function load(ehough_templating_TemplateReferenceInterface $template)
     {
     }
 
@@ -49,7 +44,7 @@ class ProjectTemplateLoader4 extends Loader
         return $this->debugger;
     }
 
-    public function isFresh(TemplateReferenceInterface $template, $time)
+    public function isFresh(ehough_templating_TemplateReferenceInterface $template, $time)
     {
         return false;
     }

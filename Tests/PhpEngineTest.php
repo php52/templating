@@ -9,23 +9,13 @@
  * file that was distributed with this source code.
  */
 
-namespace Symfony\Component\Templating\Tests;
-
-use Symfony\Component\Templating\PhpEngine;
-use Symfony\Component\Templating\Loader\Loader;
-use Symfony\Component\Templating\Storage\StringStorage;
-use Symfony\Component\Templating\Helper\SlotsHelper;
-use Symfony\Component\Templating\TemplateNameParser;
-use Symfony\Component\Templating\TemplateReferenceInterface;
-use Symfony\Component\Templating\TemplateReference;
-
-class PhpEngineTest extends \PHPUnit_Framework_TestCase
+class ehough_templating_test_ehough_templating_PhpEngineTest extends PHPUnit_Framework_TestCase
 {
     protected $loader;
 
     protected function setUp()
     {
-        $this->loader = new ProjectTemplateLoader();
+        $this->loader = new ehough_templating_test_ProjectTemplateLoader();
     }
 
     protected function tearDown()
@@ -35,29 +25,29 @@ class PhpEngineTest extends \PHPUnit_Framework_TestCase
 
     public function testConstructor()
     {
-        $engine = new ProjectTemplateEngine(new TemplateNameParser(), $this->loader);
+        $engine = new ProjectTemplateEngine(new ehough_templating_TemplateNameParser(), $this->loader);
         $this->assertEquals($this->loader, $engine->getLoader(), '__construct() takes a loader instance as its second first argument');
     }
 
     public function testOffsetGet()
     {
-        $engine = new ProjectTemplateEngine(new TemplateNameParser(), $this->loader);
-        $engine->set($helper = new \Symfony\Component\Templating\Tests\Fixtures\SimpleHelper('bar'), 'foo');
+        $engine = new ProjectTemplateEngine(new ehough_templating_TemplateNameParser(), $this->loader);
+        $engine->set($helper = new ehough_templating_test_helper_SimpleHelper('bar'), 'foo');
         $this->assertEquals($helper, $engine['foo'], '->offsetGet() returns the value of a helper');
 
         try {
             $engine['bar'];
             $this->fail('->offsetGet() throws an InvalidArgumentException if the helper is not defined');
-        } catch (\Exception $e) {
-            $this->assertInstanceOf('\InvalidArgumentException', $e, '->offsetGet() throws an InvalidArgumentException if the helper is not defined');
+        } catch (Exception $e) {
+            $this->assertInstanceOf('InvalidArgumentException', $e, '->offsetGet() throws an InvalidArgumentException if the helper is not defined');
             $this->assertEquals('The helper "bar" is not defined.', $e->getMessage(), '->offsetGet() throws an InvalidArgumentException if the helper is not defined');
         }
     }
 
     public function testGetSetHas()
     {
-        $engine = new ProjectTemplateEngine(new TemplateNameParser(), $this->loader);
-        $foo = new \Symfony\Component\Templating\Tests\Fixtures\SimpleHelper('foo');
+        $engine = new ProjectTemplateEngine(new ehough_templating_TemplateNameParser(), $this->loader);
+        $foo = new ehough_templating_test_helper_SimpleHelper('foo');
         $engine->set($foo);
         $this->assertEquals($foo, $engine->get('foo'), '->set() sets a helper');
 
@@ -69,8 +59,8 @@ class PhpEngineTest extends \PHPUnit_Framework_TestCase
         try {
             $engine->get('foobar');
             $this->fail('->get() throws an InvalidArgumentException if the helper is not defined');
-        } catch (\Exception $e) {
-            $this->assertInstanceOf('\InvalidArgumentException', $e, '->get() throws an InvalidArgumentException if the helper is not defined');
+        } catch (Exception $e) {
+            $this->assertInstanceOf('InvalidArgumentException', $e, '->get() throws an InvalidArgumentException if the helper is not defined');
             $this->assertEquals('The helper "foobar" is not defined.', $e->getMessage(), '->get() throws an InvalidArgumentException if the helper is not defined');
         }
 
@@ -81,34 +71,34 @@ class PhpEngineTest extends \PHPUnit_Framework_TestCase
 
     public function testUnsetHelper()
     {
-        $engine = new ProjectTemplateEngine(new TemplateNameParser(), $this->loader);
-        $foo = new \Symfony\Component\Templating\Tests\Fixtures\SimpleHelper('foo');
+        $engine = new ProjectTemplateEngine(new ehough_templating_TemplateNameParser(), $this->loader);
+        $foo = new ehough_templating_test_helper_SimpleHelper('foo');
         $engine->set($foo);
 
-        $this->setExpectedException('\LogicException');
+        $this->setExpectedException('LogicException');
 
         unset($engine['foo']);
     }
 
     public function testExtendRender()
     {
-        $engine = new ProjectTemplateEngine(new TemplateNameParser(), $this->loader, array(), array(new SlotsHelper()));
+        $engine = new ProjectTemplateEngine(new ehough_templating_TemplateNameParser(), $this->loader, array(), array(new ehough_templating_helper_SlotsHelper()));
         try {
             $engine->render('name');
             $this->fail('->render() throws an InvalidArgumentException if the template does not exist');
-        } catch (\Exception $e) {
-            $this->assertInstanceOf('\InvalidArgumentException', $e, '->render() throws an InvalidArgumentException if the template does not exist');
+        } catch (Exception $e) {
+            $this->assertInstanceOf('InvalidArgumentException', $e, '->render() throws an InvalidArgumentException if the template does not exist');
             $this->assertEquals('The template "name" does not exist.', $e->getMessage(), '->render() throws an InvalidArgumentException if the template does not exist');
         }
 
-        $engine = new ProjectTemplateEngine(new TemplateNameParser(), $this->loader, array(new SlotsHelper()));
-        $engine->set(new \Symfony\Component\Templating\Tests\Fixtures\SimpleHelper('bar'));
+        $engine = new ProjectTemplateEngine(new ehough_templating_TemplateNameParser(), $this->loader, array(new ehough_templating_helper_SlotsHelper()));
+        $engine->set(new ehough_templating_test_helper_SimpleHelper('bar'));
         $this->loader->setTemplate('foo.php', '<?php $view->extend("layout.php"); echo $view[\'foo\'].$foo ?>');
         $this->loader->setTemplate('layout.php', '-<?php echo $view[\'slots\']->get("_content") ?>-');
         $this->assertEquals('-barfoo-', $engine->render('foo.php', array('foo' => 'foo')), '->render() uses the decorator to decorate the template');
 
-        $engine = new ProjectTemplateEngine(new TemplateNameParser(), $this->loader, array(new SlotsHelper()));
-        $engine->set(new \Symfony\Component\Templating\Tests\Fixtures\SimpleHelper('bar'));
+        $engine = new ProjectTemplateEngine(new ehough_templating_TemplateNameParser(), $this->loader, array(new ehough_templating_helper_SlotsHelper()));
+        $engine->set(new ehough_templating_test_helper_SimpleHelper('bar'));
         $this->loader->setTemplate('bar.php', 'bar');
         $this->loader->setTemplate('foo.php', '<?php $view->extend("layout.php"); echo $foo ?>');
         $this->loader->setTemplate('layout.php', '<?php echo $view->render("bar.php") ?>-<?php echo $view[\'slots\']->get("_content") ?>-');
@@ -117,18 +107,18 @@ class PhpEngineTest extends \PHPUnit_Framework_TestCase
 
     public function testRenderParameter()
     {
-        $engine = new ProjectTemplateEngine(new TemplateNameParser(), $this->loader);
+        $engine = new ProjectTemplateEngine(new ehough_templating_TemplateNameParser(), $this->loader);
         $this->loader->setTemplate('foo.php', '<?php echo $template . $parameters ?>');
         $this->assertEquals('foobar', $engine->render('foo.php', array('template' => 'foo', 'parameters' => 'bar')), '->render() extract variables');
     }
 
     /**
-     * @expectedException \InvalidArgumentException
+     * @expectedException InvalidArgumentException
      * @dataProvider forbiddenParameterNames
      */
     public function testRenderForbiddenParameter($name)
     {
-        $engine = new ProjectTemplateEngine(new TemplateNameParser(), $this->loader);
+        $engine = new ProjectTemplateEngine(new ehough_templating_TemplateNameParser(), $this->loader);
         $this->loader->setTemplate('foo.php', 'bar');
         $engine->render('foo.php', array($name => 'foo'));
     }
@@ -143,27 +133,27 @@ class PhpEngineTest extends \PHPUnit_Framework_TestCase
 
     public function testEscape()
     {
-        $engine = new ProjectTemplateEngine(new TemplateNameParser(), $this->loader);
+        $engine = new ProjectTemplateEngine(new ehough_templating_TemplateNameParser(), $this->loader);
         $this->assertEquals('&lt;br /&gt;', $engine->escape('<br />'), '->escape() escapes strings');
-        $foo = new \stdClass();
+        $foo = new stdClass();
         $this->assertEquals($foo, $engine->escape($foo), '->escape() does nothing on non strings');
     }
 
     public function testGetSetCharset()
     {
-        $helper = new SlotsHelper();
-        $engine = new ProjectTemplateEngine(new TemplateNameParser(), $this->loader, array($helper));
-        $this->assertEquals('UTF-8', $engine->getCharset(), 'EngineInterface::getCharset() returns UTF-8 by default');
-        $this->assertEquals('UTF-8', $helper->getCharset(), 'HelperInterface::getCharset() returns UTF-8 by default');
+        $helper = new ehough_templating_helper_SlotsHelper();
+        $engine = new ProjectTemplateEngine(new ehough_templating_TemplateNameParser(), $this->loader, array($helper));
+        $this->assertEquals('UTF-8', $engine->getCharset(), 'ehough_templating_EngineInterface::getCharset() returns UTF-8 by default');
+        $this->assertEquals('UTF-8', $helper->getCharset(), 'ehough_templating_helper_HelperInterface::getCharset() returns UTF-8 by default');
 
         $engine->setCharset('ISO-8859-1');
-        $this->assertEquals('ISO-8859-1', $engine->getCharset(), 'EngineInterface::setCharset() changes the default charset to use');
-        $this->assertEquals('ISO-8859-1', $helper->getCharset(), 'EngineInterface::setCharset() changes the default charset of helper');
+        $this->assertEquals('ISO-8859-1', $engine->getCharset(), 'ehough_templating_EngineInterface::setCharset() changes the default charset to use');
+        $this->assertEquals('ISO-8859-1', $helper->getCharset(), 'ehough_templating_EngineInterface::setCharset() changes the default charset of helper');
     }
 
     public function testGlobalVariables()
     {
-        $engine = new ProjectTemplateEngine(new TemplateNameParser(), $this->loader);
+        $engine = new ProjectTemplateEngine(new ehough_templating_TemplateNameParser(), $this->loader);
         $engine->addGlobal('global_variable', 'lorem ipsum');
 
         $this->assertEquals(array(
@@ -173,7 +163,7 @@ class PhpEngineTest extends \PHPUnit_Framework_TestCase
 
     public function testGlobalsGetPassedToTemplate()
     {
-        $engine = new ProjectTemplateEngine(new TemplateNameParser(), $this->loader);
+        $engine = new ProjectTemplateEngine(new ehough_templating_TemplateNameParser(), $this->loader);
         $engine->addGlobal('global', 'global variable');
 
         $this->loader->setTemplate('global.php', '<?php echo $global; ?>');
@@ -185,13 +175,13 @@ class PhpEngineTest extends \PHPUnit_Framework_TestCase
 
     public function testGetLoader()
     {
-        $engine = new ProjectTemplateEngine(new TemplateNameParser(), $this->loader);
+        $engine = new ProjectTemplateEngine(new ehough_templating_TemplateNameParser(), $this->loader);
 
         $this->assertSame($this->loader, $engine->getLoader());
     }
 }
 
-class ProjectTemplateEngine extends PhpEngine
+class ProjectTemplateEngine extends ehough_templating_PhpEngine
 {
     public function getLoader()
     {
@@ -199,26 +189,26 @@ class ProjectTemplateEngine extends PhpEngine
     }
 }
 
-class ProjectTemplateLoader extends Loader
+class ehough_templating_test_ProjectTemplateLoader extends ehough_templating_loader_Loader
 {
     public $templates = array();
 
     public function setTemplate($name, $content)
     {
-        $template = new TemplateReference($name, 'php');
+        $template = new ehough_templating_TemplateReference($name, 'php');
         $this->templates[$template->getLogicalName()] = $content;
     }
 
-    public function load(TemplateReferenceInterface $template)
+    public function load(ehough_templating_TemplateReferenceInterface $template)
     {
         if (isset($this->templates[$template->getLogicalName()])) {
-            return new StringStorage($this->templates[$template->getLogicalName()]);
+            return new ehough_templating_storage_StringStorage($this->templates[$template->getLogicalName()]);
         }
 
         return false;
     }
 
-    public function isFresh(TemplateReferenceInterface $template, $time)
+    public function isFresh(ehough_templating_TemplateReferenceInterface $template, $time)
     {
         return false;
     }
